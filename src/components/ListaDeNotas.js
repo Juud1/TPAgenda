@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Container } from "react-bootstrap";
+import "./styles/ListaDeNotas.css";
 
 function ListaDeNotas() {
     const [nota, setNota] = useState([]);
@@ -6,7 +8,7 @@ function ListaDeNotas() {
 
     const guardar = e =>{ 
         e.preventDefault(); //se usa para evitar que se recargue la pág.
-        setNota([...nota, notita]); //
+        setNota([...nota, {texto:notita}]); //
         setNotita("");
     }
 
@@ -17,22 +19,24 @@ function ListaDeNotas() {
     }
     
     return(
-        <>
+        <Container className="contenedor">
+           
         <h1>Agenda</h1>
-        <label>Agrege una nota</label>
+
+        <label className="labelEstilo" id="secTitulo" >Agrege una nota</label>
         <br/>
-        <input type="text" id="nota" value={notita} onChange={(e) => setNotita(e.target.value)}></input>
-        <button onClick={guardar}>Agregar una nota</button>
+        <input className="input" type="text" id="nota" value={notita} onChange={(e) => setNotita(e.target.value)}></input>
+        <button className="boton" onClick={guardar}>Agregar</button>
         <br />
-        <ul>
+        <ul className="nota">
             {nota.map((nota, index) => (
                 <li key={index}>
-                    <p>{nota}</p>
-                    <button onClick ={() => borrado(index)}>Eliminar</button>
+                    <p>{nota.texto}</p>
+                    <button className="button" onClick ={() => borrado(index)}>Eliminar</button>
                 </li>
             ))}
         </ul>
-        </>
+        </Container>
     );
 }
 
